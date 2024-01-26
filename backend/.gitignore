@@ -1,0 +1,15 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# dependencies
+node_modules
+
+# optional npm cache folder
+.npm
+
+# System files and IDE config folders
+.DS_Store
+.idea
+.vscode
