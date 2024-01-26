@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 module.exports = {
@@ -5,9 +6,16 @@ module.exports = {
     res.status(200).send(res.users);
   },
   createUser: async (req, res) => {
-    const { name, about, avatar } = req.body;
+    const { name, about, avatar, email, password } = req.body;
     try {
-      const newUser = await User.create({ name, about, avatar });
+      const hash = await bcrypt.hash(password, 10);
+      const newUser = await User.create({
+        name,
+        about,
+        avatar,
+        email,
+        hash,
+      });
       res.status(200).send(newUser);
     } catch (error) {
       res.status(500).send({ message: error.message });
