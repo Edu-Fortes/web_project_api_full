@@ -5,25 +5,23 @@ const mongoose = require("mongoose");
 
 const { PORT = 3000 } = process.env;
 
-const users = require("./routes/users");
+require("dotenv").config();
+
 const cards = require("./routes/cards");
+const { login, createUser, getUser } = require("./controllers/users");
+const auth = require("./middlewares/auth");
 
 mongoose.connect("mongodb://localhost:27017/aroundb");
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: "651b626dd776339eb3ad96df",
-  };
-  next();
-});
+app.post("/signin", login);
+app.post("/signup", createUser);
 
-app.get("/", (req, res) => {
-  res.status(404).send({ message: "Request could not be found" });
-});
+app.use(auth);
 
-app.use("/", users);
+app.get("/user/me", getUser);
+
 app.use("/", cards);
 
 app.listen(PORT, () => {

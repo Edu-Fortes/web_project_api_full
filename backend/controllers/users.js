@@ -2,21 +2,34 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports = {
-  getUsers: async (req, res) => {
-    res.status(200).send(res.users);
+  getUser: async (req, res) => {
+    const userBy = await User.findOne({ _id: req.user._id });
+    res.status(200).send({
+      data: {
+        _id: req.user._id,
+        email: userBy.email,
+      },
+    });
   },
   login: async (req, res) => {
     const { email, password } = req.body;
+    const user = await User.findUserByCredentials(email, password);
     try {
-      const user = await User.findUserByCredentials(email, password);
-      const token = jwt.sign({ _id: user._id }, "super-key", {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
+        {
+          expiresIn: "7d",
+        }
+      );
       res.send({ token });
     } catch (error) {
       res.status(401).send({ message: error.message });
     }
+    return user;
   },
   createUser: async (req, res) => {
     const { name, about, avatar, email, password } = req.body;
@@ -27,9 +40,9 @@ module.exports = {
         about,
         avatar,
         email,
-        hash,
+        password: hash,
       });
-      res.status(200).send(newUser);
+      res.status(200).send({ data: { _id: newUser._id, email } });
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
