@@ -1,0 +1,19 @@
+.button_close {
+  border: none;
+  position: relative;
+  left: 2.25rem;
+  bottom: 2.25rem;
+  align-self: flex-end;
+  padding: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.button_close:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 442px) {
+  .button_close {
+    left: 0;
+  }
+}

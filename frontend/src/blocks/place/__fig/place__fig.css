@@ -1,0 +1,13 @@
+.place__fig {
+  display: flex;
+  margin: 0;
+  background-color: #000;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+  max-width: 35.25rem;
+  height: 17.625rem;
+}
+
+.place__fig:hover {
+  opacity: 0.5;
+}

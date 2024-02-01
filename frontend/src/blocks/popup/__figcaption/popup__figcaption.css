@@ -1,0 +1,8 @@
+.popup__figcaption {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  color: #fff;
+  margin-top: 0.625rem;
+}

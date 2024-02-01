@@ -1,0 +1,14 @@
+.form__item {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  border: none;
+  gap: 1.875rem;
+  width: 22.375rem;
+}
+
+@media screen and (max-width: 420px) {
+  .form__item {
+    width: 100%;
+  }
+}

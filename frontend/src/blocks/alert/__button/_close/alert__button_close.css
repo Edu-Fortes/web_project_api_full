@@ -1,0 +1,16 @@
+.alert__button_close {
+  position: relative;
+  left: 14rem;
+  bottom: 6rem;
+  transition: opacity 0.2s ease-in;
+}
+
+.alert__button_close:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 505px) {
+  .alert__button_close {
+    left: 0;
+  }
+}

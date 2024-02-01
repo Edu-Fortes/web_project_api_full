@@ -1,0 +1,6 @@
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2.25rem 2.25rem;
+  gap: 2rem;
+}

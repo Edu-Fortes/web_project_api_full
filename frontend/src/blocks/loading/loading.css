@@ -1,0 +1,21 @@
+@keyframes dot_animation {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
+
+.loading::after {
+  width: 1.5rem;
+  display: inline-block;
+  animation: dot_animation 2s infinite linear;
+  content: "";
+}

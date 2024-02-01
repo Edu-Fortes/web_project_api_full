@@ -1,0 +1,5 @@
+.alert__text {
+  font-size: clamp(1rem, 5vw, 1.5rem);
+  font-weight: 900;
+  margin: 2rem 0 0;
+}

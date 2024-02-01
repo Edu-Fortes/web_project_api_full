@@ -1,0 +1,4 @@
+.auth__container {
+  display: grid;
+  row-gap: 1rem;
+}

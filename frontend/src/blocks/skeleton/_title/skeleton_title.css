@@ -1,0 +1,13 @@
+.skeleton_title {
+  width: 19rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 1rem;
+  color: transparent;
+}
+
+@media screen and (max-width: 570px) {
+  .skeleton_title {
+    width: 10.5rem;
+  }
+}

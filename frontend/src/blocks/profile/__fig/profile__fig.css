@@ -1,0 +1,14 @@
+.profile__fig {
+  margin: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  max-width: 7.5rem;
+  max-height: 7.5rem;
+}
+
+.profile__fig:hover {
+  background-image: url("/src/images/svg/svg_pencil.svg");
+  background-repeat: no-repeat;
+  background-size: 1.625rem;
+  background-position: center;
+}

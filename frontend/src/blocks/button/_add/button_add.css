@@ -1,0 +1,24 @@
+.button_add {
+  width: 9.375rem;
+  height: 3.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.2s ease-in;
+}
+
+.button_add:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 770px) {
+  .button_add {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 442px) {
+  .button_add {
+    width: 100%;
+  }
+}

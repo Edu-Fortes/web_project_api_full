@@ -1,0 +1,17 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.popup__spinner {
+  border: 0.5rem solid #f3f3f3; /* Light grey */
+  border-top: 0.5rem solid rgb(0 0 0 / 80%);
+  border-radius: 50%;
+  width: 3.125rem;
+  height: 3.125rem;
+  animation: spin 1s linear infinite;
+}

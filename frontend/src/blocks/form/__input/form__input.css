@@ -1,0 +1,13 @@
+.form__input {
+  border: none;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  line-height: 27px;
+  margin-bottom: 1.875rem;
+  color: #fff;
+}
+
+.form__input::placeholder {
+  color: #ccc;
+}

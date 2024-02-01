@@ -1,0 +1,12 @@
+.img_avatar {
+  object-fit: cover;
+  width: 7.5rem;
+  height: 7.5rem;
+  opacity: 1;
+  transition: opacity ease-in-out 0.4s;
+}
+
+.img_avatar:hover {
+  cursor: pointer;
+  opacity: 0.2;
+}

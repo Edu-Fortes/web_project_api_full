@@ -1,0 +1,27 @@
+.alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 0.625rem;
+  color: #000;
+  margin-inline: 1.25rem;
+  padding-inline: 2.25rem;
+  padding-block: 3.75rem;
+  text-align: center;
+  max-width: 26.875rem;
+  position: relative;
+}
+
+@media screen and (max-width: 350px) {
+  .alert {
+    margin-inline: 0.5rem;
+    padding-inline: 1.19rem;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .alert {
+    padding-block: 3rem;
+  }
+}

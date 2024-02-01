@@ -1,0 +1,13 @@
+.button_trash {
+  position: absolute;
+  top: 1.125rem;
+  right: 0.9375rem;
+  border: none;
+  z-index: 1;
+  transition: transform 0.35s ease-in-out;
+  visibility: hidden;
+}
+
+.button_trash:hover {
+  transform: scale(1.4);
+}
