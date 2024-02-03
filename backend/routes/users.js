@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  getUsers,
+  getUser,
   createUser,
   doesUserExist,
   updateUserInfo,
@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/users", createUser);
 
 // All users object response
-router.get("/users", getUsers);
+router.get("/users/me", getUser);
 
 // User by ID
 router.get("/users/:id", doesUserExist);

@@ -55,7 +55,8 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(
         }
         return user;
       });
-    });
+    })
+    .catch((err) => console.log({ message: err.message }));
 };
 
 module.exports = model("user", userSchema);

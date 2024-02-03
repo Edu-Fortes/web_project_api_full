@@ -1,23 +1,34 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const HandleErrors = require("../middlewares/errors");
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = {
-  getUser: async (req, res) => {
+  getUser: async (req, res, next) => {
     const userBy = await User.findOne({ _id: req.user._id });
-    res.status(200).send({
-      data: {
-        _id: req.user._id,
-        email: userBy.email,
-      },
-    });
+    try {
+      if (!userBy) {
+        throw new HandleErrors("No user with this ID found", 404);
+      }
+      res.status(200).send({
+        data: {
+          _id: req.user._id,
+          email: userBy.email,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
   },
-  login: async (req, res) => {
+  login: async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.findUserByCredentials(email, password);
     try {
+      if (!user) {
+        throw new HandleErrors("Incorrect e-mail or password", 401);
+      }
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
@@ -26,8 +37,9 @@ module.exports = {
         }
       );
       res.send({ token });
-    } catch (error) {
-      res.status(401).send({ message: error.message });
+    } catch (err) {
+      next(err);
+      // res.status(401).send({ message: error.message });
     }
     return user;
   },
