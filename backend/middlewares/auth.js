@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const HandleErrors = require("./errors");
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -6,7 +7,7 @@ module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith("Bearer ")) {
-    return res.status(403).send({ message: "Authorization needed" });
+    throw new HandleErrors("Authorization needed", 401);
   }
 
   const token = authorization.replace("Bearer ", "");
@@ -17,11 +18,10 @@ module.exports = (req, res, next) => {
       token,
       NODE_ENV === "production" ? JWT_SECRET : "dev-secret"
     );
-  } catch (error) {
-    return res.status(401).send({ message: "Authorization needed" });
+  } catch (err) {
+    throw new HandleErrors(err.message, 401);
   }
   req.user = payload;
-  console.log(payload);
 
-  next();
+  return next();
 };

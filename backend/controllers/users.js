@@ -44,6 +44,7 @@ module.exports = {
     return user;
   },
   createUser: async (req, res) => {
+    // eslint-disable-next-line object-curly-newline
     const { name, about, avatar, email, password } = req.body;
     try {
       const hash = await bcrypt.hash(password, 10);
