@@ -65,15 +65,17 @@ module.exports = {
       next(err);
     }
   },
-  doesUserExist: async (req, res) => {
-    const { users } = res;
-    const { id } = req.params;
-    const existUser = users.find((user) => user._id.toString() === id);
-
-    if (!existUser) {
-      return res.status(404).send({ message: "User ID not found" });
+  doesUserExist: async (req, res, next) => {
+    const existUser = await User.findById(req.params.id);
+    try {
+      if (!existUser) {
+        throw new HandleErrors("User ID not found", 404);
+      }
+      return res.status(200).send(existUser);
+    } catch (err) {
+      next(err);
     }
-    return res.status(200).send(existUser);
+    return existUser;
   },
   updateUserInfo: async (req, res) => {
     try {
