@@ -22,7 +22,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
       validate: {
         validator: (v) => isEmail(v),

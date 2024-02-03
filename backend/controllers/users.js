@@ -39,14 +39,19 @@ module.exports = {
       res.send({ token });
     } catch (err) {
       next(err);
-      // res.status(401).send({ message: error.message });
     }
     return user;
   },
-  createUser: async (req, res) => {
+  createUser: async (req, res, next) => {
     // eslint-disable-next-line object-curly-newline
     const { name, about, avatar, email, password } = req.body;
     try {
+      if (!email) {
+        throw new HandleErrors("Email field is required", 400);
+      }
+      if (!password) {
+        throw new HandleErrors("Password field is requered", 400);
+      }
       const hash = await bcrypt.hash(password, 10);
       const newUser = await User.create({
         name,
@@ -56,8 +61,8 @@ module.exports = {
         password: hash,
       });
       res.status(200).send({ data: { _id: newUser._id, email } });
-    } catch (error) {
-      res.status(500).send({ message: error.message });
+    } catch (err) {
+      next(err);
     }
   },
   doesUserExist: async (req, res) => {
