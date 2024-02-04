@@ -88,10 +88,18 @@ module.exports = {
           new: true,
           runValidators: true,
         }
-      ).orFail();
-      res.status(200).send(updatedUser);
-    } catch (error) {
-      res.status(400).send({ message: error.message });
+      ).orFail(new HandleErrors("User Id not found", 404));
+      return res.status(200).send(updatedUser);
+    } catch (err) {
+      if (err.name === "ValidationError") {
+        console.log(err.message);
+        const errors = {};
+        Object.keys(err.errors).forEach((key) => {
+          errors[key] = err.errors[key].message;
+        });
+        return res.status(400).send(errors);
+      }
+      return res.status(500).send({ message: "Server error" });
     }
   },
   updateAvatar: async (req, res) => {

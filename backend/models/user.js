@@ -8,10 +8,17 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
+      minLength: [2, "Name field must have at least 2 characters in length"],
+      maxLength: [40, "Name field must have at maximun 40 character in length"],
       default: "Jacques Cousteau",
     },
     about: {
       type: String,
+      minLength: [2, "About field must have at least 2 characters in length"],
+      maxLength: [
+        200,
+        "About field must have at maximun 200 character in length",
+      ],
       default: "Explorer",
     },
     avatar: {
@@ -33,7 +40,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       select: false,
-      minlength: 8,
+      minLength: 8,
     },
   },
   { versionKey: false }
