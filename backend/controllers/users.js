@@ -85,6 +85,7 @@ module.exports = {
     } catch (err) {
       next(err);
     }
+    return res;
   },
   updateAvatar: async (req, res) => {
     try {

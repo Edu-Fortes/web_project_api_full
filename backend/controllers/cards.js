@@ -11,25 +11,25 @@ module.exports = {
       res.status(404).send({ message: error.message });
     }
   },
-  createCard: async (req, res) => {
+  createCard: async (req, res, next) => {
     const { name, link } = req.body;
     try {
       const newCard = await Card.create({ name, link, owner: req.user._id });
       res.send(newCard);
     } catch (err) {
-      res.status(400).send(err.message);
+      next(err);
     }
   },
-  deleteCard: async (req, res) => {
+  deleteCard: async (req, res, next) => {
     const { cardId } = req.params;
     try {
       const deletedCard = await Card.findByIdAndDelete(cardId).orFail();
       res.send(deletedCard);
-    } catch (error) {
-      res.status(404).send(error.message);
+    } catch (err) {
+      next(err);
     }
   },
-  addLike: async (req, res) => {
+  addLike: async (req, res, next) => {
     try {
       await Card.findByIdAndUpdate(
         req.params.cardId,
@@ -39,11 +39,11 @@ module.exports = {
         { new: true }
       ).orFail();
       res.status(200).send({ message: "Card liked" });
-    } catch (error) {
-      res.status(404).send(error.message);
+    } catch (err) {
+      next(err);
     }
   },
-  dislike: async (req, res) => {
+  dislike: async (req, res, next) => {
     try {
       await Card.findByIdAndUpdate(
         req.params.cardId,
@@ -51,8 +51,8 @@ module.exports = {
         { new: true }
       ).orFail();
       res.status(200).send({ message: "Card disliked" });
-    } catch (error) {
-      res.status(404).send(error.message);
+    } catch (err) {
+      next(err);
     }
   },
 };
