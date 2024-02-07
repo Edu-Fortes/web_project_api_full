@@ -43,25 +43,18 @@ module.exports = {
     return user;
   },
   createUser: async (req, res, next) => {
-    // eslint-disable-next-line object-curly-newline
-    const { name, about, avatar, email, password } = req.body;
+    const { email, password } = req.body;
     try {
-      if (!email) {
-        throw new HandleErrors("Email field is required", 400);
-      }
-      if (!password) {
-        throw new HandleErrors("Password field is requered", 400);
-      }
       const hash = await bcrypt.hash(password, 10);
       const newUser = await User.create({
-        name,
-        about,
-        avatar,
         email,
         password: hash,
       });
       res.status(200).send({ data: { _id: newUser._id, email } });
     } catch (err) {
+      if (err.code === 11000) {
+        res.status(500).send({ message: "E-mail already exists" });
+      }
       next(err);
     }
   },
@@ -77,7 +70,7 @@ module.exports = {
     }
     return existUser;
   },
-  updateUserInfo: async (req, res) => {
+  updateUserInfo: async (req, res, next) => {
     try {
       const me = req.user._id;
       const { name, about } = req.body;
@@ -86,20 +79,11 @@ module.exports = {
         { name, about },
         {
           new: true,
-          runValidators: true,
         }
       ).orFail(new HandleErrors("User Id not found", 404));
       return res.status(200).send(updatedUser);
     } catch (err) {
-      if (err.name === "ValidationError") {
-        console.log(err.message);
-        const errors = {};
-        Object.keys(err.errors).forEach((key) => {
-          errors[key] = err.errors[key].message;
-        });
-        return res.status(400).send(errors);
-      }
-      return res.status(500).send({ message: "Server error" });
+      next(err);
     }
   },
   updateAvatar: async (req, res) => {
@@ -110,7 +94,7 @@ module.exports = {
         _id,
         { avatar },
         { new: true, runValidators: true }
-      ).orFail();
+      ).orFail(new HandleErrors("User Id not found", 404));
       res.status(200).send(updateAvatar);
     } catch (error) {
       res.status(400).send({ message: error.message });
