@@ -12,11 +12,13 @@ const cards = require("./routes/cards");
 const users = require("./routes/users");
 const { login, createUser } = require("./controllers/users");
 const auth = require("./middlewares/auth");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 mongoose.connect("mongodb://localhost:27017/aroundb");
 
 app.use(express.json());
 
+app.use(requestLogger);
 // Create new user
 app.post(
   "/signup",
@@ -43,6 +45,8 @@ app.post(
 app.use(auth);
 app.use("/", users);
 app.use("/", cards);
+
+app.use(errorLogger);
 
 app.use(errors());
 
