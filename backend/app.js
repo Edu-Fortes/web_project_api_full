@@ -4,6 +4,7 @@ const express = require("express");
 
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 const { celebrate, Joi, errors } = require("celebrate");
 
 const { PORT = 3000 } = process.env;
@@ -15,6 +16,9 @@ const auth = require("./middlewares/auth");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 mongoose.connect("mongodb://localhost:27017/aroundb");
+
+app.use(cors());
+app.options("*", cors());
 
 app.use(express.json());
 
