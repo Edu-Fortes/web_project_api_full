@@ -1,9 +1,0 @@
-.footer {
-  margin-block: 3.75rem;
-}
-
-@media screen and (max-width: 918px) {
-  .footer {
-    margin-inline: 1.1875rem;
-  }
-}
