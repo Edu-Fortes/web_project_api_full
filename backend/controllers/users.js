@@ -15,6 +15,9 @@ module.exports = {
       res.status(200).send({
         data: {
           _id: req.user._id,
+          name: userBy.name,
+          about: userBy.about,
+          avatar: userBy.avatar,
           email: userBy.email,
         },
       });
