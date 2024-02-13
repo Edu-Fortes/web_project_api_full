@@ -1,15 +1,14 @@
 import { urlPaths } from "./constants";
 
 class Api {
-  constructor({ baseUrl, authorization }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
-    this._authorization = authorization;
   }
 
-  get(what) {
+  get(what, authorization) {
     return fetch(`${this._baseUrl}/${what}`, {
       headers: {
-        authorization: this._authorization,
+        authorization: authorization,
       },
     }).then((res) => {
       if (res.ok) {
