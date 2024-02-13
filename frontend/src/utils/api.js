@@ -8,7 +8,7 @@ class Api {
   get(what, authorization) {
     return fetch(`${this._baseUrl}/${what}`, {
       headers: {
-        authorization: authorization,
+        Authorization: `Bearer ${authorization}`,
       },
     }).then((res) => {
       if (res.ok) {
@@ -18,11 +18,11 @@ class Api {
     });
   }
 
-  patch(where, { name, about, link }) {
+  patch(where, authorization, { name, about, link }) {
     return fetch(`${this._baseUrl}/${where}`, {
       method: "PATCH",
       headers: {
-        authorization: this._authorization,
+        Authorization: `Bearer ${authorization}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -38,11 +38,11 @@ class Api {
     });
   }
 
-  post(where, { name, link }) {
+  post(where, authorization, { name, link }) {
     return fetch(`${this._baseUrl}/${where}`, {
       method: "POST",
       headers: {
-        authorization: this._authorization,
+        Authorization: `Bearer ${authorization}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -57,11 +57,11 @@ class Api {
     });
   }
 
-  delete(where, what) {
+  delete(where, what, authorization) {
     return fetch(`${this._baseUrl}/${where}/${what}`, {
       method: "DELETE",
       headers: {
-        authorization: this._authorization,
+        Authorization: `Bearer ${authorization}`,
         "Content-Type": "application/json",
       },
     }).then((res) => {
@@ -72,11 +72,11 @@ class Api {
     });
   }
 
-  put(where, what) {
+  put(where, what, authorization) {
     return fetch(`${this._baseUrl}/${where}/${what}`, {
       method: "PUT",
       headers: {
-        authorization: this._authorization,
+        Authorization: `Bearer ${authorization}`,
       },
     }).then((res) => {
       if (res.ok) {
