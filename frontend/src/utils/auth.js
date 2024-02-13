@@ -1,4 +1,6 @@
-const BASE_URL = "https://register.nomoreparties.co";
+import { urlPaths } from "./constants";
+
+const BASE_URL = urlPaths.baseUrl;
 
 const signup = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
