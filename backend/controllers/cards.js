@@ -38,7 +38,7 @@ module.exports = {
         },
         { new: true }
       ).orFail();
-      res.status(200).send({ message: "Card liked" });
+      res.status(200).send({ message: "Card liked", _id: req.params.cardId });
     } catch (err) {
       next(err);
     }
@@ -50,7 +50,9 @@ module.exports = {
         { $pull: { likes: req.user._id } },
         { new: true }
       ).orFail();
-      res.status(200).send({ message: "Card disliked" });
+      res
+        .status(200)
+        .send({ message: "Card disliked", _id: req.params.cardId });
     } catch (err) {
       next(err);
     }
