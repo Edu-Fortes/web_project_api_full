@@ -13,10 +13,11 @@ module.exports = {
         throw new HandleErrors("No user with this ID found", 404);
       }
       res.status(200).send({
-        data: {
-          _id: req.user._id,
-          email: userBy.email,
-        },
+        _id: req.user._id,
+        name: userBy.name,
+        about: userBy.about,
+        avatar: userBy.avatar,
+        email: userBy.email,
       });
     } catch (err) {
       next(err);
