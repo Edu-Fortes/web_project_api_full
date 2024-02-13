@@ -38,12 +38,13 @@ function App() {
   const [pageButton, setPageButton] = useState(true);
   const [isRight, setIsRight] = useState(false);
   const [isNavburgerOpen, setIsNavburgerOpen] = useState(false);
+  const [authorization, setAuthorization] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     //fetch user data from server
     api
-      .get(urlPaths.user)
+      .get(urlPaths.user, authorization)
       .then((res) => {
         setCurrentUser(res);
       })
@@ -68,6 +69,7 @@ function App() {
         }
         setTokenData(res.data.email);
         setLoggedIn(true);
+        setAuthorization(token);
         navigate("/");
       } catch (err) {
         console.log(err);
