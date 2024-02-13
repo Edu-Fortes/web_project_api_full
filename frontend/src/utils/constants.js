@@ -3,7 +3,6 @@ const urlPaths = {
   baseUrl: "https://api.aroundfull.abacusstar.com.au",
   user: "users/me",
   cards: "cards",
-  likes: "cards/likes",
   changeAvatar: "users/me/avatar",
 };
 //forms configuration
