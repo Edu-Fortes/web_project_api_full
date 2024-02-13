@@ -42,42 +42,45 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    //fetch user data from server
-    api
-      .get(urlPaths.user, authorization)
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setLoadingProfile(false));
-    //fetch card list from server
-    api
-      .get(urlPaths.cards)
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err))
+    const token = localStorage.getItem("jwt");
+    setAuthorization(token);
 
-      .finally(() => setLoadingCards(false));
-    //check if user is logged in
-    async function handleCheckToken() {
-      const token = localStorage.getItem("jwt");
-      const res = await auth.checkToken(token);
-      try {
-        if (res === undefined) {
-          return;
+    if (token) {
+      //check if user is logged in
+      async function handleCheckToken() {
+        const res = await auth.checkToken(token);
+        try {
+          if (res === undefined) {
+            return;
+          }
+          setTokenData(res.email);
+          setLoggedIn(true);
+          navigate("/");
+        } catch (err) {
+          console.log(err);
         }
-        setTokenData(res.data.email);
-        setLoggedIn(true);
-        setAuthorization(token);
-        navigate("/");
-      } catch (err) {
-        console.log(err);
       }
-    }
+      //fetch user data from server
+      api
+        .get(urlPaths.user, token)
+        .then((res) => {
+          setCurrentUser(res);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setLoadingProfile(false));
+      //fetch card list from server
+      api
+        .get(urlPaths.cards, token)
+        .then((res) => {
+          setCards(res);
+        })
+        .catch((err) => console.log(err))
 
-    handleCheckToken();
-  }, [navigate]);
+        .finally(() => setLoadingCards(false));
+
+      handleCheckToken();
+    }
+  }, [navigate, authorization, loggedIn]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -108,11 +111,11 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (!isLiked) {
       api
-        .put(urlPaths.likes, card._id)
+        .put(urlPaths.cards, `${card._id}/likes`, authorization)
         .then((newCard) => {
           setCards((state) =>
             state.map((c) => (c._id === card._id ? newCard : c))
@@ -121,7 +124,7 @@ function App() {
         .catch((err) => console.log(err));
     } else {
       api
-        .delete(urlPaths.likes, card._id)
+        .delete(urlPaths.cards, `${card._id}/likes`, authorization)
         .then((newCard) => {
           setCards((state) =>
             state.map((c) => (c._id === card._id ? newCard : c))
@@ -132,15 +135,16 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    console.log("Log do card handleCardDelete: ", card._id);
     api
-      .delete(urlPaths.cards, card._id)
+      .delete(urlPaths.cards, card._id, authorization)
       .then(setCards((state) => state.filter((c) => c._id !== card._id)))
       .catch((err) => console.log(err));
   }
 
   function handleUpdateUser(name, about) {
     api
-      .patch(urlPaths.user, { name, about })
+      .patch(urlPaths.user, authorization, { name, about })
       .catch((err) => console.log(err))
       .finally(() => setIsBtnLoading(false));
     setCurrentUser({ ...currentUser, name, about });
@@ -149,7 +153,7 @@ function App() {
 
   function handleUpdateAvatar(avatarRef) {
     api
-      .patch(urlPaths.changeAvatar, { link: avatarRef })
+      .patch(urlPaths.changeAvatar, authorization, { link: avatarRef })
       .catch((err) => console.log(err))
       .finally(() => setIsBtnLoading(false));
     setCurrentUser({ ...currentUser, avatar: avatarRef });
@@ -157,7 +161,10 @@ function App() {
 
   function handleAddPlaceSubmit(newCard) {
     api
-      .post(urlPaths.cards, { link: newCard.link, name: newCard.name })
+      .post(urlPaths.cards, authorization, {
+        link: newCard.link,
+        name: newCard.name,
+      })
       .then((cardData) => setCards([cardData, ...cards]))
       .catch((err) => console.log(err))
       .finally(() => setIsBtnLoading(false));
@@ -178,7 +185,7 @@ function App() {
 
   async function handleTokenData(tokenData) {
     const res = await auth.checkToken(tokenData);
-    setTokenData(await res.data.email);
+    setTokenData(await res.email);
   }
 
   function handlePageButton(text) {

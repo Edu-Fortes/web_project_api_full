@@ -10,18 +10,18 @@ export default function Card({ onCardClick, onCardLike, onCardDelete }) {
 
   const cardList = cardsArray.map(function (card) {
     //checks if current user is the card owner
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner === currentUser._id;
     //variable to define if trash button is shown or not
     const cardDeleteButtonClassName = `button ${
       isOwn ? "button_trash button_trash_visible" : "button_trash"
     }`;
 
     //checks if card was liked by current user
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     //defines class name to active or deactive like icon
     const cardLikeButtonClassName = `${isLiked ? "button__like_active" : ""}`;
 
-    function handleLikeClick(e) {
+    function handleLikeClick() {
       onCardLike(card);
     }
 
