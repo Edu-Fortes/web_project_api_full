@@ -31,28 +31,26 @@ module.exports = {
   },
   addLike: async (req, res, next) => {
     try {
-      await Card.findByIdAndUpdate(
+      const card = await Card.findByIdAndUpdate(
         req.params.cardId,
         {
           $addToSet: { likes: req.user._id },
         },
         { new: true }
       ).orFail();
-      res.status(200).send({ message: "Card liked", _id: req.params.cardId });
+      res.status(200).send(card);
     } catch (err) {
       next(err);
     }
   },
   dislike: async (req, res, next) => {
     try {
-      await Card.findByIdAndUpdate(
+      const card = await Card.findByIdAndUpdate(
         req.params.cardId,
         { $pull: { likes: req.user._id } },
         { new: true }
       ).orFail();
-      res
-        .status(200)
-        .send({ message: "Card disliked", _id: req.params.cardId });
+      res.status(200).send(card);
     } catch (err) {
       next(err);
     }
