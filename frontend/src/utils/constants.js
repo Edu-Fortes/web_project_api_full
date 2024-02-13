@@ -1,7 +1,6 @@
 //paths to complete API Base URL
 const urlPaths = {
-  baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_04",
-  authorization: "f76476c9-9b53-4968-99fe-a8b4cbde5202",
+  baseUrl: "https://api.aroundfull.abacusstar.com.au",
   user: "users/me",
   cards: "cards",
   likes: "cards/likes",
