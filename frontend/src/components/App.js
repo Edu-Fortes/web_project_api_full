@@ -26,6 +26,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState();
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState();
+  const [isRight, setIsRight] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
@@ -36,7 +37,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [tokenData, setTokenData] = useState("");
   const [pageButton, setPageButton] = useState(true);
-  const [isRight, setIsRight] = useState(false);
   const [isNavburgerOpen, setIsNavburgerOpen] = useState(false);
   const [authorization, setAuthorization] = useState("");
   const navigate = useNavigate();
@@ -192,8 +192,8 @@ function App() {
     setPageButton(text);
   }
 
-  function handleIsRight() {
-    setIsRight(true);
+  function handleIsRight(boo) {
+    setIsRight(boo);
   }
 
   function useMediaQuery(string) {
@@ -275,6 +275,7 @@ function App() {
                   pageButton={handlePageButton}
                   openAlert={handleInfoTooltip}
                   handleLoggin={handleLoggin}
+                  isRight={handleIsRight}
                 />
                 <InfoTooltip
                   isOpen={isInfoTooltipOpen}

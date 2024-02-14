@@ -5,11 +5,11 @@ export default function InfoTooltip({ isOpen, onClose, isRight }) {
   const navigate = useNavigate();
 
   function handleCloseButton() {
-    if (isRight) {
+    if (isRight === true) {
       onClose();
+      navigate("/signin");
     }
     onClose();
-    navigate("/signin");
   }
 
   return (

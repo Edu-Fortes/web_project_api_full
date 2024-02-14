@@ -17,13 +17,9 @@ const signup = ({ email, password }) => {
           message: "Some thing went wrong. Verify one of the fields.",
         });
       }
-      if (res.status === 201) {
-        return res.json();
-      }
+      return res.json();
     })
-    .then((res) => {
-      return res;
-    })
+    .then((data) => data)
     .catch((err) => console.log("Error message:", err));
 };
 

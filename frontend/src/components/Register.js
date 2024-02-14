@@ -14,12 +14,15 @@ export default function Register({ pageButton, openAlert, isRight }) {
     e.preventDefault();
     try {
       const res = await auth.signup({ email, password });
-      if (res) {
-        isRight();
+      if (res.error) {
+        isRight(false);
         openAlert();
+        throw new Error(res.validation.body.message);
       }
+      isRight(true);
+      openAlert();
     } catch (err) {
-      console.log("Error message:", err);
+      console.log(err.message);
     }
   }
 

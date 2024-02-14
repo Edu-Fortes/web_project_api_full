@@ -7,6 +7,7 @@ export default function Login({
   pageButton,
   openAlert,
   handleLoggin,
+  isRight,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +25,7 @@ export default function Login({
     try {
       const res = await auth.signin({ email, password });
       if (res === undefined) {
+        isRight(false);
         openAlert();
         return;
       }
