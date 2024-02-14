@@ -23,6 +23,14 @@ app.options("*", cors());
 app.use(express.json());
 
 app.use(requestLogger);
+
+// crash teste by TripleTen. Remove it before the revision
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("O servidor travará agora");
+  }, 0);
+});
+
 // Create new user
 app.post(
   "/signup",
