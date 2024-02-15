@@ -4,10 +4,10 @@
 <br />
 <div align="center" >
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/svg_logo.svg" alt="Around the U.S project logo" width="300" height="80" style="background-color:black; border-radius:5px; box-shadow: 9px 9px 19px -6px rgba(0,0,0,0.53); padding: 1rem">
+    <img src="./backend/images/gh-readme/svg_logo.svg" alt="Around the U.S project logo" width="300" height="80" style="background-color:black; border-radius:5px; box-shadow: 9px 9px 19px -6px rgba(0,0,0,0.53); padding: 1rem">
   </a>
 
-<h3 align="center">BACK-END</h3>
+<h3 align="center">FULL-STACK</h3>
 
   <p align="center">
     TripleTen WebDev bootcamp project
@@ -26,13 +26,19 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#usage">Usage</a>
+    <ul>
+      <li><a href="#change-user-name-and-about-information">Change user name and about information</li>
+      <li><a href="#change-avatar-picture">Change avatar picture</li>
+      <li><a href="#add-new-card">Add new card</li>
+      <li><a href="#deleting-a-card">Deleting a card</li>
+      <li><a href="#increasing-card-image">Increasing card image</li>
+      <li><a href="#like-a-card">Like a card</li>
+    </ul>
+    </li>
     <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#easter-egg">Easter Egg</a></li>
   </ol>
 </details>
 
@@ -40,13 +46,21 @@
 
 ## About The Project
 
-This project aims on the back-end side of "The Around U.S" WebApp. When fully coded, the server will be able to verify tokens, to save and to return cards and to remember if an user liked or not an given card. The hole objective is to create a server with an API and user autenthication.
+This "The Around U.S" WebApp is the final project of TripleTen Web Development bootcamp.
 
-In this project I had the oportunity to develop my knowledge with database, how to teste and cofigure validation and to deploy the server in a remote machine.
+In this App you can register, login and post photos of U.S.A places that you visited. You can like and dislike a photo of your our other user. If you do not like the photo that you post earlier you can delete it clicking in the trash button on the top right corner of the photo. After you made the registration and login to the page, change your user name and your about field and you can change your avatar picture too.
 
-You can check my front-end version of the page made using React.js at [https://edu-fortes.github.io/around-react_ptbr/](https://edu-fortes.github.io/around-react_ptbr/)
+In this project I had the oportunity to develop my fullstack knowledge learned throughout the course. I have to say that was amazing.
+
+I did not know anything about web development and ending with this project is something very special.
+
+I hope you like it as much a liked to code it.
+
+You can check the project at [https://aroundfull.abacusstar.com.au](https://aroundfull.abacusstar.com.au)
 
 ### Built With
+
+### Backend
 
 - [![NodeJS][NodeJS]][NodeJS-url]
 - [![MongoDB][MongoDB]][MongoDB-url]
@@ -54,124 +68,66 @@ You can check my front-end version of the page made using React.js at [https://e
 - [![Mongoose][Mongoose]][Mongoose-url]
 - [![Postman][Postman]][Postman-url]
 
+### Frontend
+
+- [![React][React]][React-url]
+- [![ReactRouter][ReactRouter]][ReactRouter-url]
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+As soon you access the page, it will ask for your credentials, but you do not have it yet, so click on "Ainda não é membro? Inscreva-se aqui" link, below the "Entrar" button.
 
-### Prerequisites
+![Singin page with link to register](./backend/images/gh-readme/register_link.jpg)
 
-- You will need an API client to make the required requests and visualize response. You can use [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/).
+You will receive a popup message if your registration was successful. After that, enter your registered e-mail and password to go to the user home page.
 
-![Postman screenshot ](./images/gh-readme/Postman__structure.jpg)
-
-- MongoDB with a database conected on _'**mongodb://localhost:27017/**'_. You can install the MongoDB community version at [https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)
-
-![MongoDB screenshot with conection address](./images/gh-readme/mongoDb_conection.jpg)
-
-- Node.js and Node Package Manager (npm). If not installed, follow the address to install it ([https://nodejs.org/en](https://nodejs.org/en)).
-
-  To check if you have Node.js and NPM installed run the following in your terminal:
-
-  - node
-
-    ```sh
-    node -v
-    ```
-
-    Expected to return your Node version.
-
-  - npm
-    ```sh
-    npm -v
-    ```
-    Expected to return your NPM version.
-
-### Installation
-
-1. Fork this repo to your GitHub account
-2. Clone the forked repo from your account
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Change to cloned folder
-4. Install NPM packages dependencies
-   ```sh
-   npm install
-   ```
-
-<!-- USAGE -->
+![Loged home page](./backend/images/gh-readme/loged_home.jpg)
 
 ## Usage
 
-To lauch the server execute:
+### Change user name and about information
 
-```sh
-npm run start
-```
+To change the user name and about information just click on the edit icon (pencil). Delete the default name and about and put yours. Hit the "Salvar" button. You should see the new entered data on the page.
 
-To lauch the server in development mode with the hot reload active, execute:
+![Edit profile modal](./backend/images/gh-readme/edit_profile.jpg)
 
-```sh
-npm run dev
-```
+### Change avatar picture
 
-In either way, the server is going to lauch on port _3000_. Use _http://localhost:3000_ as base URL address to make HTTP requests using _Postman/Insomnia_.
+To change the avatar picture follow the same step when changing the user profile information. Hover over the avatar picture and click on the edit icon (pencil). In this field put your image URL.
 
-### Endpoint to users:
+![Edit avatar picture](./backend/images/gh-readme/avatar_edit.jpg)
 
-`GET /users` - returns users document from MongoDB. First you need to create an user to populate this document, else it is going to return an error message.
+### Add new card
 
-`GET /users/:userId` - returns an user by ID. Replace `:userId` by user ID.
+Click on the button with a "plus sign", fill in the requered fields - name and image URL, hit "Criar"button.
 
-![Postman screenshot with GET request on users/ID](./images/gh-readme/Postman__user_ID.jpg)
+You will see the new card added to the top of the stack.
 
-`POST /users` - creates a new user. Must pass a JSON on body request with `name` and `about`, like this:
+![Add new card modal](./backend/images/gh-readme/add_card.jpg)
 
-    {
-      "name": "Some name",
-      "about": "Some work description",
-    }
+### Deleting a card
 
-![Postman screenshot with POST request](./images/gh-readme/Postman__user_create.jpg)
+To delete a card just click on the trash button on the top right corner of the card and confirm the deletion when prompted.
 
-`PATCH /users/me` - updates profile. Pass a JSON body request with `name` and `about`.
+You can only delete the cards you posted.
 
-![Postman screenshot with PATCH request](./images/gh-readme/Postman__user_patch_info.jpg)
+![Delete card alert message](./backend/images/gh-readme/delete_msg.jpg)
 
-`PATCH /users/me/avatar` - updates avatar. Pass a JSON body request with `avatar` containing an image URL:
+### Increasing card image
 
-    {
-      "avatar": "http://YOUR__IMAGE__URL.com"
-    }
+To see clearly the card picture you can click on it to enlarge the photo. This way you can see the details and give a step further liking waht you see.
 
-![Postman screenshot with PATCH request on avatar endpoint](./images/gh-readme/Postman__user_patch_avatar.jpg)
+![Enlarged picture](./backend/images/gh-readme/large_pic.jpg)
 
-### Endpoints to cards:
+### Like a card
 
-`GET /cards` - returns cards document from MongoDB. You need to create some cards to populate this document, else it is going to return an error message.
+If you liked your card or the card of other user, you can show it by clicking in the heart icon.
 
-![Postman screenshot with GET request on /cards](./images/gh-readme/Postman__get_cards.jpg)
+Below the heart icon are the number of likes that card received.
 
-`POST /cards` - creates a new card. Pass a JSON body request with `name` and `link`:
-
-    {
-      "name": "Name of the card",
-      "link": "https://URL__to__image.com"
-    }
-
-![Postman screenshot with POST request on /cards](./images/gh-readme/Postman__create_card.jpg)
-
-`DELETE /cards/:cardId`: deletes a card by ID. Replace `:cardId` with the card ID.
-
-![Postman screenshot with DELETE request to /cards/ID](./images/gh-readme/Postman__deleted-card.jpg)
-
-`PUT /cards/:cardId/likes` - like a card. Replace `:cardId` by card ID to be liked.
-
-`DELETE /cards/:cardId/likes` - dislike a card. Replace `:cardId` by card ID to be dislike.
-
-If something gets wrong with your request, is supposed to the server to return an HTTP status code and an error message in JSON format.
+And if you do not like the card anymore, just hit the heart again and it will be disliked.
 
 <!-- CONTRIBUTING -->
 
@@ -205,6 +161,14 @@ git push origin feature/AmazingFeature
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Easter Egg
+
+Can you guess what word form using the first letter of each card?
+
+![Easter Egg](./backend/images/gh-readme/easter.jpg)
+
+I will give you a tip: It gives you the best bootcamp for web development. LOL
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -219,173 +183,6 @@ git push origin feature/AmazingFeature
 [Mongoose-url]: https://mongoosejs.com/
 [Postman]: https://img.shields.io/badge/Postman-FF6C37.svg?style=for-the-badge&logo=Postman&logoColor=white
 [Postman-url]: https://www.postman.com/
-
-<!-- FRONTEND README -->
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center" >
-  <a href="https://github.com/github_username/repo_name">
-    <img src="src/images/svg/svg_logo.svg" alt="Around the U.S project logo" width="300" height="80" style="background-color:black; border-radius:5px; box-shadow: 9px 9px 19px -6px rgba(0,0,0,0.53); padding: 1rem">
-  </a>
-
-<h3 align="center">FRONT-END USER AUTHENTICATION</h3>
-
-  <p align="center">
-    TripleTen WebDev bootcamp project
-  </p>
-</div>
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-  </ol>
-</details>
-
-<!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-This project implements the register and authorization of user in "The Around U.S" WebApp. Implementes these new functions on the front-end side using React.
-
-In this project I had the oportunity to develop my knowledge about user registration and authorization in regards their differences, was able to handle with token and to know a little about ciber security.
-
-You can check the final front-end version of the page made using React.js at [https://edu-fortes.github.io/web_project_around_auth/](https://edu-fortes.github.io/web_project_around_auth/)
-
-### Built With
-
-- [![React][React]][React-url]
-- [![ReactRouter][ReactRouter]][ReactRouter-url]
-
-<!-- GETTING STARTED -->
-
-## Getting Started
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-- Node Package Manager (npm). If not installed, follow the address to install it ([https://nodejs.org/en](https://nodejs.org/en)).
-
-  To check if you have Node.js and NPM installed run the following in your terminal:
-
-  - node
-
-    ```sh
-    node -v
-    ```
-
-    Expected to return your Node version.
-
-  - npm
-    ```sh
-    npm -v
-    ```
-    Expected to return your NPM version.
-
-### Installation
-
-1. Fork this repo to your GitHub account
-2. Clone the forked repo from your account
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Change to cloned folder
-4. Install NPM packages dependencies
-   ```sh
-   npm install
-   ```
-
-<!-- USAGE -->
-
-## Usage
-
-To lauch the server with hot reload, execute:
-
-```sh
-npm run start
-```
-
-The server is going to lauch on port _3000_. Use _http://localhost:3000_ on your web browser to lauch the WebApp.
-
-### Register new user:
-
-As soon you load the WebApp, you will be redirect to the login page, once you are not registered yet.
-
-To register click on the link below the "Entrar" button (marked with an orange square on the picture below).
-
-![Initial screen of Around U.S.A WebApp](./src/images/github/initial_screen.jpg)
-
-- In the register page, fill in the requered e-mail and password fields.
-
-**P.S: DO NOT use your personal e-mail and any of your passwords. Is not guaranteed the security of the server.**
-
-![New user registration screen](./src/images/github/register_page.jpg)
-
-- If every thing went right, when you click on the "Inscrever-se" button a popup will be presented with an success message. Then you will be redirect to the login page again.
-
-![Success messagem after a good registration](./src/images/github/register_success.jpg)
-
-### Signin
-
-- Enter your e-mail and password created in the preview step and hit "Entrar" button.
-
-- Again, if every thing went right, your access will be granted to the main page.
-
-![Main page of the WebApp](./src/images/github/main_page.jpg)
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-
-2. Create your Feature Branch
-
-```sh
-git checkout -b feature/AmazingFeature
-```
-
-3. Commit your Changes
-
-```sh
-git commit -m 'Add some AmazingFeature'
-```
-
-4. Push to the Branch
-
-```sh
-git push origin feature/AmazingFeature
-```
-
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
 [React]: https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge
 [React-url]: https://react.dev/
 [ReactRouter]: https://img.shields.io/badge/-React%20Router-CA4245?logo=react-router
