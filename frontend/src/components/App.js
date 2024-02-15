@@ -1,7 +1,6 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { form, urlPaths } from "../utils/constants";
 import { useEffect, useMemo, useState } from "react";
@@ -21,6 +20,7 @@ import PageButton from "./PageButton";
 import InfoTooltip from "./InfoTooltip";
 import NavBurgerButton from "./NavBurgerButton";
 import NavBurger from "./NavBurger";
+import DeleteAlert from "./DeletAlert";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
@@ -28,6 +28,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState();
   const [isRight, setIsRight] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState("");
   const [selectedCard, setSelectedCard] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -101,10 +103,16 @@ function App() {
     setIsInfoTooltipOpen(!isInfoTooltipOpen);
   }
 
+  function handleTrashClick(card) {
+    setIsDeleteAlertOpen(true);
+    setCardToDelete(card);
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsDeleteAlertOpen(false);
     setSelectedCard(false);
     setIsInfoTooltipOpen(false);
     setIsNavburgerOpen(false);
@@ -134,11 +142,12 @@ function App() {
     }
   }
 
-  function handleCardDelete(card) {
-    console.log("Log do card handleCardDelete: ", card._id);
+  function handleCardDelete() {
     api
-      .delete(urlPaths.cards, card._id, authorization)
-      .then(setCards((state) => state.filter((c) => c._id !== card._id)))
+      .delete(urlPaths.cards, cardToDelete._id, authorization)
+      .then(
+        setCards((state) => state.filter((c) => c._id !== cardToDelete._id))
+      )
       .catch((err) => console.log(err));
   }
 
@@ -314,7 +323,7 @@ function App() {
                     onEditAvatarClick={handleEditAvatarClick}
                     onCardClick={handleCardClick}
                     onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
+                    onCardDelete={handleTrashClick}
                     isProfileLoading={loadingProfile}
                     isCardsLoading={loadingCards}
                   />
@@ -344,8 +353,11 @@ function App() {
                     {...form.changeAvatar.input}
                   />
 
-                  {/* Delete Alert Modal */}
-                  <PopupWithForm {...form.deleteAlert} />
+                  <DeleteAlert
+                    isOpen={isDeleteAlertOpen}
+                    onClose={closeAllPopups}
+                    onConfirm={handleCardDelete}
+                  />
 
                   {/* Modal to Show Big Image */}
                   <ImagePopup card={selectedCard} onClose={closeAllPopups} />
